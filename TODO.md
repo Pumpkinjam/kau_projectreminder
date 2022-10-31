@@ -1,3 +1,5 @@
-### [github... Oh, it's here]
+### Figma - UI prototype construction  ..done!
 
-# Figma - UI prototype construction
+# Making Prototype Layout 
+# Search about Google Map API
+# Search about Google Calender API
