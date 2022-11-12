@@ -45,12 +45,12 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button8" />
+        app:layout_constraintTop_toBottomOf="@+id/btn_set_notification" />
 
 
 
     <Button
-        android:id="@+id/button8"
+        android:id="@+id/btn_set_notification"
         android:layout_width="320dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="60dp"

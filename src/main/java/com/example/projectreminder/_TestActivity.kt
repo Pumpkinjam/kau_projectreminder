@@ -3,9 +3,9 @@ package com.example.projectreminder
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 
-class TestActivity : AppCompatActivity() {
+class _TestActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_test)
+        setContentView(R.layout._activity_test)
     }
 }

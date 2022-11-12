@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.projectreminder.databinding.ActivityMainBinding
 
+// TODO: add button clickListners
 class MainActivity : AppCompatActivity() {
     lateinit var binding: ActivityMainBinding
 
