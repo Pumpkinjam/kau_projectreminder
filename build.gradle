@@ -7,7 +7,7 @@ android {
     compileSdk 32
 
     defaultConfig {
-        applicationId "com.example.projectreminder"
+        applicationId 'com.example.MemoI'
         minSdk defaultMinSdkVersion
         targetSdk 32
         versionCode 1

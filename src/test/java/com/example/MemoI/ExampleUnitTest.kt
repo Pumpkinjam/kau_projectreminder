@@ -1,4 +1,4 @@
-package com.example.projectreminder
+package com.example.MemoI
 
 import org.junit.Test
 

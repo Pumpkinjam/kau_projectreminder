@@ -1,4 +1,4 @@
-package com.example.projectreminder;
+package com.example.MemoI;
 
 import java.io.File;
 import java.util.StringTokenizer;
@@ -40,7 +40,6 @@ public class Todo {
             d = Integer.parseInt(st.nextToken()),
             H = Integer.parseInt(st.nextToken()),
             M = Integer.parseInt(st.nextToken());
-
 
         return new Todo(
                 tokens.get(1),

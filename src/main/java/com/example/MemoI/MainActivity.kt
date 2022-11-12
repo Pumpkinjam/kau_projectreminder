@@ -1,16 +1,17 @@
-package com.example.projectreminder
+package com.example.MemoI
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.example.projectreminder.databinding.ActivityMainBinding
+import com.example.MemoI.databinding.ActivityMainBinding
+import java.util.*
 
 // TODO: add button clickListners
 class MainActivity : AppCompatActivity() {
 
-    // TODO: path has to be fixed by editing project(application) name
-    private val dirPath = "/storage/emulated/0/Android/data/com.example.projectreminder/files/"
-    lateinit var todoList: ArrayList<Todo>
+    // TODO: todoList logic, and save the information to file(csv format)
+    private val dirPath = "/storage/emulated/0/Android/data/com.example.MemoI/files/"
+    lateinit var todoList: Vector<Todo>
     lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {

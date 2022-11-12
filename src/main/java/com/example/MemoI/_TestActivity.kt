@@ -1,4 +1,4 @@
-package com.example.projectreminder
+package com.example.MemoI
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle

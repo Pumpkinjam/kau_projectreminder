@@ -1,10 +1,10 @@
-package com.example.projectreminder
+package com.example.MemoI
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
-import com.example.projectreminder.databinding.ActivitySettingBinding
+import com.example.MemoI.databinding.ActivitySettingBinding
 import java.util.Stack
 
 class SettingActivity : AppCompatActivity() {
@@ -23,7 +23,6 @@ class SettingActivity : AppCompatActivity() {
             commit()
             fragment
         }
-
         binding.btnBack.setOnClickListener { view ->
             if (viewStack.empty()) {
                 val intent = Intent(this,MainActivity::class.java)

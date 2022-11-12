@@ -1,11 +1,11 @@
-package com.example.projectreminder
+package com.example.MemoI
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.projectreminder.databinding.FragmentSettingBinding
+import com.example.MemoI.databinding.FragmentSettingBinding
 import com.google.android.material.snackbar.Snackbar
 
 class FragmentSetting : Fragment() {
@@ -28,25 +28,25 @@ class FragmentSetting : Fragment() {
             parentActivity.changeFragment(frg)
         }
 
-        fun soManyThingsToDO(view: View) {Snackbar.make(view, "구현중...", Snackbar.LENGTH_SHORT).show()}
+        fun soManyThingsToDo(view: View) {Snackbar.make(view, "구현중...", Snackbar.LENGTH_SHORT).show()}
 
-        binding.btnSetDate.setOnClickListener { _ -> moveFragment(fragment_set_date()) }
+        binding.btnSetDate.setOnClickListener { _ -> moveFragment(FragmentSetDate()) }
 
-        binding.btnSetLoc.setOnClickListener { _ -> moveFragment(fragment_set_location()) }
+        binding.btnSetLoc.setOnClickListener { _ -> moveFragment(FragmentSetLocation()) }
 
         binding.btnTodo.setOnClickListener { view ->
             //TODO: pop-up for input
-            soManyThingsToDO(view)
+            soManyThingsToDo(view)
         }
 
         binding.btnSetAppOpen.setOnClickListener { view ->
             //TODO: select the application, and then save it
-            soManyThingsToDO(view)
+            soManyThingsToDo(view)
         }
 
         binding.btnSetUrl.setOnClickListener { view ->
             //TODO: input the url.
-            soManyThingsToDO(view)
+            soManyThingsToDo(view)
         }
 
         return binding.root

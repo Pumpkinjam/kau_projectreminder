@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragment_set_location">
+    tools:context=".FragmentSetLocation">
 
     <TextView
         android:id="@+id/textView"
@@ -33,13 +33,14 @@
         app:layout_constraintTop_toBottomOf="@+id/textView" />
 
     <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/fragmentContainerView"
-        android:name="com.example.projectreminder.fragment_set_location_setting"
+        android:id="@+id/frmLocationSetting"
+        android:name="com.example.MemoI.FragmentSetLocationSetting"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="180dp"
+        android:layout_marginTop="200dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_open_map" />
+        app:layout_constraintTop_toBottomOf="@+id/btn_open_map"
+        tools:layout="@layout/fragment_set_location_setting" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
