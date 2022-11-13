@@ -23,7 +23,7 @@ class SettingActivity : AppCompatActivity() {
             commit()
             fragment
         }
-        binding.btnBack.setOnClickListener { view ->
+        binding.btnBack.setOnClickListener { _ ->
             if (viewStack.empty()) {
                 val intent = Intent(this,MainActivity::class.java)
                 startActivity(intent)
@@ -37,13 +37,25 @@ class SettingActivity : AppCompatActivity() {
         }
 
         // TODO: save the change before returning to main activity
-        binding.btnConfirm.setOnClickListener { view ->
+        binding.btnConfirm.setOnClickListener { _ ->
             val intent = Intent(this,MainActivity::class.java)
             startActivity(intent)
         }
 
     }
 
+    override fun onBackPressed() {
+        if (viewStack.empty()) {
+            val intent = Intent(this,MainActivity::class.java)
+            startActivity(intent)
+        }
+        else {
+            supportFragmentManager.beginTransaction().run{
+                replace(binding.frmFragmentSetting.id,viewStack.pop())
+                commit()
+            }
+        }
+    }
     // fragment in "frmFragmentSetting" can be changed by this method
     public fun changeFragment(frg: Fragment) {
         supportFragmentManager.beginTransaction()

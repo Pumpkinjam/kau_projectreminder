@@ -1,32 +1,71 @@
 package com.example.MemoI;
 
 import java.io.File;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.StringTokenizer;
 import java.time.*;
 import java.util.Vector;
 
 public class Todo {
 
-    private static int n = 0;
+    private static long n = 0;
 
-    // primary key for the Instance, not displayed for user
-    public final int instanceNum;
-    public String title, description;
+    // primary key for the Instance
+    public final long instanceNum;  // instanceNum NOT NULL, not displayed for user
+                                    // in general case, this can't be null
+    public String title;            // title NOT NULL
 
-    private String filepath, filename;
+    public String description;
+    public static final String
+            filepath = "/Android/data/com.example.MemoI/files/",
+            filename = "todos.csv",
+            fileprefix = "todos",
+            filesuffix = ".csv";
+
+    public static final String[] fileDirArray = {"/Android", "/data", "/com.example.MemoI", "/files"};
+
     private LocalDateTime timing;
 
     // TODO: find appropriate class for location
     Object location;
 
+    public final class NullIntegrityException extends RuntimeException {
+        NullIntegrityException() {
+            super("title cannot be null");
+        }
+    }
+
+    // lots of... constructors... for null proccessing
+    Todo(String title) {
+        this(title, null, null, null);
+    }
+
+    Todo(String title, String description) {
+        this(title, description, null, null);
+    }
+
+    Todo(String title, String description, int y, int m, int d, int H, int M) {
+        this(title, description,
+                LocalDateTime.of(LocalDate.of(y,m,d), LocalTime.of(H,M)),
+                null);
+    }
+
     Todo(String title, String description, LocalDateTime timing) {
+        this(title, description, timing, null);
+    }
+
+    Todo(String title, String description, LocalDateTime timing, Object location) {
+        if (title == null) throw new NullIntegrityException();
+
         n++;
         this.title = title;
         this.description = description;
         this.timing = timing;
+        this.location = location;
         this.instanceNum = n;
 
-        File file = new File(filepath, filename);
+        // File file = new File(filepath, filename);
     }
 
     public static Todo of(String csv) {
@@ -52,6 +91,7 @@ public class Todo {
     /* formatting to
      * "{instanceNum}, {title}, {description}, {timing}, {location}\n"
      */
+    // TODO: in csv, we can't save character ","...
     public String toCsvFormat() {
         String res = "";
         res += instanceNum + ", ";
@@ -61,6 +101,12 @@ public class Todo {
         res += location.toString();
 
         return res + "\n";
+    }
+
+
+    public static Path getDirPath() {
+        //return (Path) Paths.get("/storage", "emulated", "0", "Android", "data", "com.example.MemoI", "files");
+        return Paths.get(filepath);
     }
 
     // get/set -ters
@@ -95,5 +141,15 @@ public class Todo {
 
     public void setTime(int h, int m) {
         this.setTime(LocalTime.of(h, m));
+    }
+
+    // toString() Override
+    @Override
+    public String toString() {
+        return "<Object Todo#" + instanceNum + ">" +
+                "\nTitle: " + title +
+                "\nDescription: " + description +
+                "\nTiming: " + timing +
+                "\bLocation" + location;
     }
 }
