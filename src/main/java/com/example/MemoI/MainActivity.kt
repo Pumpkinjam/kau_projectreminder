@@ -24,7 +24,7 @@ class MainActivity : AppCompatActivity() {
     // DO-ing: todoList logic, and save the information to file(csv format)
     // TODO+: encryption?
     lateinit var todoList: Vector<Todo>
-    lateinit var activityStack: Stack<ActivityCompat>
+    //lateinit var activityStack: Stack<ActivityCompat>
     lateinit var binding: ActivityMainBinding
     //lateinit var savefile: File
 /*
@@ -144,7 +144,7 @@ class MainActivity : AppCompatActivity() {
 
 */
         binding.addMore.setOnClickListener {
-            todoList.add(Todo("title!", "Des!", ))
+            //todoList.add(Todo("title!", "Des!", ))
             System.out.println(todoList.get(0))
             val intent = Intent(this, SettingActivity::class.java)
             startActivity(intent)
