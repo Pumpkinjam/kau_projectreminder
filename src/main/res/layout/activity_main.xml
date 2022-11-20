@@ -6,6 +6,17 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+    <Button
+        android:id="@+id/test_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="16dp"
+        android:layout_weight="1"
+        android:text="test_it"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/add_more"
         android:layout_width="wrap_content"
@@ -18,6 +29,7 @@
         app:srcCompat="@android:drawable/ic_input_add" />
 
     <LinearLayout
+        android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginBottom="100dp"
@@ -76,6 +88,7 @@
                 android:layout_marginBottom="629dp"
                 android:background="@drawable/roundedbutton"
                 android:text="Diary" />
+
         </LinearLayout>
     </LinearLayout>
 

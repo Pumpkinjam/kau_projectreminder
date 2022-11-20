@@ -1,13 +1,17 @@
 package com.example.MemoI
 
+import android.app.NotificationChannel
+import android.app.NotificationManager
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Environment
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.app.ActivityCompat
+import androidx.core.app.NotificationCompat
 import com.example.MemoI.databinding.ActivityMainBinding
 import com.google.android.material.snackbar.Snackbar
 import java.io.*
@@ -15,6 +19,7 @@ import java.nio.Buffer
 import java.nio.file.Files
 import java.nio.file.Path
 import java.nio.file.Paths
+import java.time.LocalDateTime
 import java.util.*
 
 // TODO: add button clickListners
@@ -96,6 +101,31 @@ class MainActivity : AppCompatActivity() {
             //System.out.println(todoList.get(0))
             val intent = Intent(this, SettingActivity::class.java)
             startActivity(intent)
+        }
+
+        binding.testBtn.setOnClickListener {
+            val thislocaltime : LocalDateTime = LocalDateTime.now()
+            var builder = NotificationCompat.Builder(this, "test_channel")
+                .setSmallIcon(R.drawable.ic_launcher_background)
+                .setContentTitle("알림 제목")
+                .setContentText("알림 내용 $thislocaltime")
+
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) { // 오레오 버전 이후에는 알림을 받을 때 채널이 필요
+                val channel_id = "test_channel" // 알림을 받을 채널 id 설정
+                val channel_name = "채널이름" // 채널 이름 설정
+                val descriptionText = "설명글" // 채널 설명글 설정
+                val importance = NotificationManager.IMPORTANCE_DEFAULT // 알림 우선순위 설정
+                val channel = NotificationChannel(channel_id, channel_name, importance).apply {
+                    description = descriptionText
+                }
+
+                // 만든 채널 정보를 시스템에 등록
+                val notificationManager: NotificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+                notificationManager.createNotificationChannel(channel)
+
+                // 알림 표시: 알림의 고유 ID(ex: 1002), 알림 결과
+                notificationManager.notify(1002, builder.build())
+            }
         }
     }
 
