@@ -5,16 +5,23 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.ViewModelProvider
 import com.example.MemoI.databinding.ActivitySettingBinding
 import java.util.Stack
 
 class SettingActivity : AppCompatActivity() {
 
+    lateinit var vm : AppViewModel
+    lateinit var tempTodo : Todo
     lateinit var binding : ActivitySettingBinding
     lateinit var viewStack : Stack<Fragment>   // for btn_back makes the screen return step-by-step
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        vm = ViewModelProvider(this)[AppViewModel::class.java]
+        tempTodo = vm.tempTodo.value!!
 
         binding = ActivitySettingBinding.inflate(layoutInflater)
         viewStack = Stack<Fragment>()
@@ -26,6 +33,7 @@ class SettingActivity : AppCompatActivity() {
             commit()
             fragment
         }
+
         binding.btnBack.setOnClickListener { _ ->
             if (viewStack.empty()) {
                 val intent = Intent(this,MainActivity::class.java)

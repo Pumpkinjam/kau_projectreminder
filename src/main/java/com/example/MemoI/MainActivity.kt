@@ -33,6 +33,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
 
+
         vm = ViewModelProvider(this)[AppViewModel::class.java]
         todoList = vm.todoList.value!!
 
@@ -41,6 +42,8 @@ class MainActivity : AppCompatActivity() {
 
 
         if (reqPermission()) loadFile()
+
+        println(todoList)
 
         binding.addMore.setOnClickListener {
             //todoList.add(Todo("title!", "Des!", ))
@@ -77,9 +80,13 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onBackPressed() {
+        val a = Intent(Intent.ACTION_MAIN)
+        a.addCategory(Intent.CATEGORY_HOME)
+        a.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+        startActivity(a)
         println("\n\n\n==========Exiting...===========\n\n\n")
         this.finish()
-        exitProcess(0)
+        // exitProcess(0) << Do not call this code. AppViewModel.onCleared() will not be called.
     }
 
     // viewModel works for this
