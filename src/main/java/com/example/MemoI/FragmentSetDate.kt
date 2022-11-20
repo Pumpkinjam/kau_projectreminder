@@ -8,15 +8,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.ViewModelProvider
 import com.example.MemoI.databinding.FragmentSetDateBinding
 import java.util.*
 
 class FragmentSetDate : Fragment() {
 
     //lateinit var vm: AppViewModel
-    val vm: AppViewModel by activityViewModels()
+    val vm: SettingViewModel by activityViewModels()
     lateinit var binding: FragmentSetDateBinding
 
     private var calendar = Calendar.getInstance()
@@ -28,7 +26,6 @@ class FragmentSetDate : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
     }
 
     override fun onCreateView(
@@ -42,7 +39,8 @@ class FragmentSetDate : Fragment() {
             btnSetDate.setOnClickListener {
                 val datePickerDialog =
                     DatePickerDialog.OnDateSetListener { datepicker, year, month, day ->
-                        txtStartDate.text = "$year/${(month + 1)}/$day"
+                        txtStartDateCheck.text = "$year/${(month + 1)}/$day"
+                        (activity as SettingActivity).tempTodo.setDate(year, month+1, day);
                     }
                 var date = DatePickerDialog(activity as SettingActivity, datePickerDialog, year, month, day)
                 date.show()
@@ -51,7 +49,8 @@ class FragmentSetDate : Fragment() {
             btnSetTime.setOnClickListener {
                 val timePickerDialog =
                     TimePickerDialog.OnTimeSetListener { timePicker, hour, minute ->
-                        btnSetTime.text = "${hour}시 ${minute}분"
+                        txtStartTimeCheck.text = "${hour}시 ${minute}분"
+                        (activity as SettingActivity).tempTodo.setTime(hour, minute);
                     }
                 var time = TimePickerDialog(activity as SettingActivity, timePickerDialog, hour, minute, false)
                 time.show()

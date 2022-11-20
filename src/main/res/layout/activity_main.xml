@@ -23,7 +23,6 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="30dp"
         android:layout_marginBottom="30dp"
-        android:clickable="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:srcCompat="@android:drawable/ic_input_add" />
@@ -31,10 +30,9 @@
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginBottom="100dp"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent">
+        app:layout_constraintTop_toTopOf="parent">
 
         <TextView
             android:id="@+id/txt_appName"
@@ -52,8 +50,8 @@
                 android:id="@+id/btn_all"
                 android:layout_width="98dp"
                 android:layout_height="36dp"
-                android:layout_marginTop="30dp"
-                android:layout_marginBottom="629dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
                 android:background="@drawable/roundedbutton"
                 android:text="All()"
                 android:textColor="#000000" />
@@ -63,8 +61,8 @@
                 android:layout_width="98dp"
                 android:layout_height="36dp"
                 android:layout_marginLeft="7dp"
-                android:layout_marginTop="30dp"
-                android:layout_marginBottom="629dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
                 android:background="@drawable/roundedbutton"
                 android:text="Today()" />
 
@@ -73,23 +71,28 @@
                 android:layout_width="98dp"
                 android:layout_height="36dp"
                 android:layout_marginLeft="7dp"
-                android:layout_marginTop="30dp"
-                android:layout_marginBottom="629dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
                 android:background="@drawable/roundedbutton"
                 android:text="Location"
-                android:textSize="5pt" />
+                android:textSize="14sp" />
 
             <Button
                 android:id="@+id/btn_diary"
                 android:layout_width="98dp"
                 android:layout_height="36dp"
                 android:layout_marginLeft="7dp"
-                android:layout_marginTop="30dp"
-                android:layout_marginBottom="629dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
                 android:background="@drawable/roundedbutton"
                 android:text="Diary" />
 
         </LinearLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rec_todo"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
     </LinearLayout>
 
 

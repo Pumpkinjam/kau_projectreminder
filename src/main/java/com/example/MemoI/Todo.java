@@ -1,31 +1,26 @@
 package com.example.MemoI;
 
-import java.io.File;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.StringTokenizer;
-import java.time.*;
-import java.util.Vector;
+import java.io.Serializable;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 
-public class Todo {
-
+public class Todo implements Serializable {
     private static long n = 0;
 
     // primary key for the Instance
-    public final long instanceNum;  // instanceNum NOT NULL, not displayed for user
-                                    // in general case, this can't be null
+    public final long instanceNum = ++n;  // instanceNum NOT NULL, not displayed for user
+
+    // in general case, this can't be null
     public String title;            // title NOT NULL
 
     public String description;
-    public static final String
-            filepath = "/Android/data/com.example.MemoI/files/",
-            filename = "todos.csv",
-            fileprefix = "todos",
-            filesuffix = ".csv";
-
-    public static final String[] fileDirArray = {"/Android", "/data", "/com.example.MemoI", "/files"};
+    public static final String filename = "todos.csv";
 
     private LocalDateTime timing;
+    private LocalDate date;
+    private LocalTime time;
 
     // TODO: find appropriate class for location
     Object location;
@@ -36,77 +31,40 @@ public class Todo {
         }
     }
 
-    // lots of... constructors... for null proccessing
-    Todo(String title) {
-        this(title, null, null, null);
-    }
 
-    Todo(String title, String description) {
-        this(title, description, null, null);
-    }
-
-    Todo(String title, String description, int y, int m, int d, int H, int M) {
-        this(title, description,
-                LocalDateTime.of(LocalDate.of(y,m,d), LocalTime.of(H,M)),
-                null);
-    }
-
-    Todo(String title, String description, LocalDateTime timing) {
-        this(title, description, timing, null);
-    }
-
-    Todo(String title, String description, LocalDateTime timing, Object location) {
+    Todo(String title, String description, LocalDate date, LocalTime time, Object location) {
         if (title == null) throw new NullIntegrityException();
 
-        n++;
         this.title = title;
         this.description = description;
-        this.timing = timing;
+        this.date = date;
+        this.time = time;
+        this.timing = (date != null && time != null) ? LocalDateTime.of(date, time) : null;
         this.location = location;
-        this.instanceNum = n;
 
         // File file = new File(filepath, filename);
     }
 
-    public static Todo of(String csv) {
-        StringTokenizer st = new StringTokenizer(csv, ", ");
-        Vector<String> tokens = new Vector<>();
-        while (st.hasMoreTokens()) tokens.add(st.nextToken());
-
-        st = new StringTokenizer(tokens.get(3), "-T:");
-        int y = Integer.parseInt(st.nextToken()),
-            m = Integer.parseInt(st.nextToken()),
-            d = Integer.parseInt(st.nextToken()),
-            H = Integer.parseInt(st.nextToken()),
-            M = Integer.parseInt(st.nextToken());
-
-        return new Todo(
-                tokens.get(1),
-                tokens.get(2),
-                LocalDateTime.of(LocalDate.of(y,m,d), LocalTime.of(H, M))
-        );
-
-    }
 
     /* formatting to
-     * "{instanceNum}, {title}, {description}, {timing}, {location}\n"
+     * "{title}, {description}, {time}, {date}, {location}\n"
      */
     // TODO: in csv, we can't save character ","...
     public String toCsvFormat() {
         String res = "";
-        res += instanceNum + ", ";
+        //res += instanceNum + ", ";
         res += title + ", ";
-        res += description + ", ";
-        res += timing + ", ";
-        res += location.toString();
+        res += (description == null ? "null" : description) + ", ";
 
+        String strDate = dateToString();
+        res += (strDate.equals("") ? "null" : strDate) + ", ";
+        String strTime = timeToString();
+        res += (strTime.equals("") ? "null" : strTime) + ", ";
+
+        res += location == null ? "null" : location.toString();
+
+        System.out.println(res);
         return res + "\n";
-    }
-
-
-    public static Path getDirPath() {
-        //return (Path) Paths.get("/storage", "emulated", "0", "Android", "data", "com.example.MemoI", "files");
-        return Paths.get(filepath);
     }
 
     // get/set -ters
@@ -121,11 +79,15 @@ public class Todo {
         return this.timing;
     }
 
+    public LocalDate getDate() { return this.date; }
+
+    public LocalTime getTime() { return this.time; }
+
     public void setDate(LocalDate date) {
-        this.timing = LocalDateTime.of(
-                date,
-                LocalTime.of(timing.getHour(), timing.getMinute())
-        );
+        this.date = date;
+        if (this.time != null) {
+            this.timing = LocalDateTime.of(date, this.time);
+        }
     }
 
     public void setDate(int y, int m, int d) {
@@ -133,10 +95,10 @@ public class Todo {
     }
 
     public void setTime(LocalTime time) {
-        this.timing = LocalDateTime.of(
-                LocalDate.of(timing.getYear(),timing.getMonth(), timing.getDayOfMonth()),
-                time
-        );
+        this.time = time;
+        if (this.date != null) {
+            this.timing = LocalDateTime.of(this.date, time);
+        }
     }
 
     public void setTime(int h, int m) {
@@ -151,5 +113,15 @@ public class Todo {
                 "\nDescription: " + description +
                 "\nTiming: " + timing +
                 "\bLocation" + location;
+    }
+
+    public String dateToString() {
+        if (this.date == null) return "";
+        return this.date.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+    }
+
+    public String timeToString() {
+        if (this.time == null) return "";
+        return this.time.format(DateTimeFormatter.ofPattern("HH:mm"));
     }
 }
