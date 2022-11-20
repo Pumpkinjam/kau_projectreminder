@@ -3,63 +3,54 @@ package com.example.MemoI
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import com.example.MemoI.databinding.FragmentSetDateBinding
 import java.util.*
 
-// THIS CLASS IS EMPTY.
-// TODO: make buttons work.
 class FragmentSetDate : Fragment() {
     private var calendar = Calendar.getInstance()
     private var year = calendar.get(Calendar.YEAR)
     private var month = calendar.get(Calendar.MONTH)
     private var day = calendar.get(Calendar.DAY_OF_MONTH)
-    private var hour = calendar.get(Calendar.HOUR)
+    private var hour =calendar.get(Calendar.HOUR_OF_DAY)
     private var minute = calendar.get(Calendar.MINUTE)
-    private var am = calendar.get(Calendar.AM_PM)
-    lateinit var binding: FragmentSetDateBinding;
+
+    lateinit var binding: FragmentSetDateBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding.btnSetDate.setOnClickListener {
-
-            val datePickerDialog = DatePickerDialog(requireActivity().applicationContext, { _, year, month, day ->
-                binding.startDateText.text =
-                    year.toString() + "/" + (month + 1).toString() + "/" + day.toString()
-            }, year, month, day)
-            datePickerDialog.show()
-        }
-        binding.btnSetTime.setOnClickListener {
-            val timePickerDialog = TimePickerDialog.OnTimeSetListener{ timePicker, hour, minute ->
-                binding.btnSetTime.text =
-                    hour.toString() + "/" + minute.toString()
-            }
-            var listener = TimePickerDialog(requireActivity().applicationContext, timePickerDialog, hour, minute, false)
-            listener.show()
-        }
-        binding.btnCompletion.setOnClickListener {
-
-
-        }
     }
-//
+
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentSetDateBinding.inflate(inflater, container, false)
-        return binding.root
-    }
-
-    companion object {
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            FragmentSetDate().apply {
-                arguments = Bundle().apply {
-                }
+        with (binding) {
+            // todo?: click txtStartDate to change format "yyyy년 mm월 dd일"
+            btnSetDate.setOnClickListener {
+                val datePickerDialog =
+                    DatePickerDialog.OnDateSetListener { datepicker, year, month, day ->
+                        txtStartDate.text = "$year/${(month + 1)}/$day"
+                    }
+                var date = DatePickerDialog(activity as SettingActivity, datePickerDialog, year, month, day)
+                date.show()
             }
+
+            btnSetTime.setOnClickListener {
+                val timePickerDialog =
+                    TimePickerDialog.OnTimeSetListener { timePicker, hour, minute ->
+                        btnSetTime.text = "${hour}시 ${minute}분"
+                    }
+                var time = TimePickerDialog(activity as SettingActivity, timePickerDialog, hour, minute, false)
+                time.show()
+            }
+        }
+
+        return binding.root;
     }
 }

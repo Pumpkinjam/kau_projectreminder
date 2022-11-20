@@ -16,10 +16,10 @@ tools:context=".FragmentSetDate">
         android:text="일정 시작 시간을 선택하세요."
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/start_date_text" />
+        app:layout_constraintTop_toBottomOf="@+id/txt_start_date" />
 
     <Button
-        android:id="@+id/button9"
+        android:id="@+id/btn_set_priority"
         android:layout_width="320dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
@@ -28,32 +28,10 @@ tools:context=".FragmentSetDate">
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/alarm_button" />
-
-    <Button
-        android:id="@+id/btn_completion"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="16dp"
-        android:background="#00ff0000"
-        android:text="확인"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/back_btn_tosett"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
-        android:background="#00ff0000"
-        android:text="←뒤로가기"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/btn_set_alarm" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/txt_set_date_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="600dp"
@@ -66,7 +44,7 @@ tools:context=".FragmentSetDate">
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/alarm_button"
+        android:id="@+id/btn_set_alarm"
         android:layout_width="320dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="60dp"
@@ -81,7 +59,7 @@ tools:context=".FragmentSetDate">
         app:layout_constraintTop_toBottomOf="@+id/btn_set_time" />
 
     <TextView
-        android:id="@+id/start_date_text"
+        android:id="@+id/txt_start_date"
         android:layout_width="320dp"
         android:layout_height="40dp"
         android:layout_marginTop="70dp"
@@ -94,10 +72,10 @@ tools:context=".FragmentSetDate">
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        app:layout_constraintTop_toBottomOf="@+id/txt_set_date_title" />
 
     <TextView
-        android:id="@+id/start_text"
+        android:id="@+id/txt_calender"
         style="bold"
         android:layout_width="73dp"
         android:layout_height="30dp"
