@@ -7,10 +7,18 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.ViewModelProvider
 import com.example.MemoI.databinding.FragmentSetDateBinding
 import java.util.*
 
 class FragmentSetDate : Fragment() {
+
+    //lateinit var vm: AppViewModel
+    val vm: AppViewModel by activityViewModels()
+    lateinit var binding: FragmentSetDateBinding
+
     private var calendar = Calendar.getInstance()
     private var year = calendar.get(Calendar.YEAR)
     private var month = calendar.get(Calendar.MONTH)
@@ -18,10 +26,9 @@ class FragmentSetDate : Fragment() {
     private var hour =calendar.get(Calendar.HOUR_OF_DAY)
     private var minute = calendar.get(Calendar.MINUTE)
 
-    lateinit var binding: FragmentSetDateBinding
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
     }
 
     override fun onCreateView(
@@ -52,5 +59,9 @@ class FragmentSetDate : Fragment() {
         }
 
         return binding.root;
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
     }
 }
